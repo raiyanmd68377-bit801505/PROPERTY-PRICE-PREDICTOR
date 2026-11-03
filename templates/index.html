@@ -1,4 +1,173 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Price Predictor</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #101827, #1d3557);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: #ffffff;
+            color: #172033;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.3);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: 2px solid #2563eb;
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #ecfdf5;
+            color: #047857;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        @media (max-width: 500px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Property Price Predictor</h1>
+        <p class="subtitle">
+            Estimate your house price using Machine Learning
+        </p>
+
+        <form action="/predict" method="POST">
+
+            <div class="form-grid">
+
+                <div>
+                    <label>Area (sq ft)</label>
+                    <input type="number" name="area"
+                        placeholder="Enter area" min="1" required>
+                </div>
+
+                <div>
+                    <label>Bedrooms</label>
+                    <input type="number" name="bedrooms"
+                        placeholder="Enter bedrooms" min="1" required>
+                </div>
+
+                <div>
+                    <label>Bathrooms</label>
+                    <input type="number" name="bathrooms"
+                        placeholder="Enter bathrooms" min="1" required>
+                </div>
+
+                <div>
+                    <label>Stories</label>
+                    <input type="number" name="stories"
+                        placeholder="Enter stories" min="1" required>
+                </div>
+
+                <div>
+                    <label>Parking</label>
+                    <input type="number" name="parking"
+                        placeholder="Enter parking" min="0" required>
+                </div>
+
+            </div>
+
+            <button type="submit">Predict House Price</button>
+
+        </form>
+
+        {% if prediction is defined %}
+        <div class="result">
+            <h3>Estimated House Price</h3>
+            <h2>₹{{ "{:,.2f}".format(prediction) }}</h2>
+        </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>
+
 
            
            
